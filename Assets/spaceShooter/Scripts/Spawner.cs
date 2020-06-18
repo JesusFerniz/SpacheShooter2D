@@ -5,10 +5,11 @@ using UnityEngine;
 public class Spawner : MonoBehaviour
 {
     public GameObject prefab;
+    public float timeBetweenSpawns = 1f;
 
     private void Start()
     {
-        InvokeRepeating("Spawn", 1f, 3f);
+        InvokeRepeating("Spawn", 1f, timeBetweenSpawns);
     }
     void Spawn()
     {

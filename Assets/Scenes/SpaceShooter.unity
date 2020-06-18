@@ -550,7 +550,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7709ebba3786974fbd7355251baff17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  maxHP: 100
 --- !u!50 &1660691257
 Rigidbody2D:
   serializedVersion: 4
@@ -598,6 +598,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.99, y: 0.75}
   m_EdgeRadius: 0
+--- !u!114 &1660691261
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1660691255}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 141e1da0898e5cb4ca973ee43dfd0129, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 5
 --- !u!1 &1927023928 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3063376838137195552, guid: 290f2c1d9b19a9e469a8d20732b2e0fd,
@@ -638,6 +651,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1
+  damageAmount: 10
 --- !u!61 &1927023932
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -694,6 +708,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 1927023928}
+  timeBetweenSpawns: 1
 --- !u!4 &2102618267
 Transform:
   m_ObjectHideFlags: 0
@@ -702,7 +717,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2102618265}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.46151614, y: 1.0211667, z: -2.7497067}
+  m_LocalPosition: {x: -0.08, y: 5.11, z: -2.7497067}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -792,7 +807,7 @@ PrefabInstance:
     - target: {fileID: 3063376838137195582, guid: 290f2c1d9b19a9e469a8d20732b2e0fd,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.11
+      value: -6.51
       objectReference: {fileID: 0}
     - target: {fileID: 3063376838137195582, guid: 290f2c1d9b19a9e469a8d20732b2e0fd,
         type: 3}

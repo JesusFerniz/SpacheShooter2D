@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Media;
 using UnityEngine;
 
 public class Meteoritos : MonoBehaviour
 {
     public float speed = 5f;
+    public float damageAmount = 10f;
 
     private Rigidbody2D rb;
 
@@ -16,6 +18,9 @@ public class Meteoritos : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        //Destroy(this.gameObject);
+        Player player = collision.gameObject.GetComponent<Player>();
+        player.Damage(damageAmount);
+
+        Destroy(this.gameObject);
     }
 }
