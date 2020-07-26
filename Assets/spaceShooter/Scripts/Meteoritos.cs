@@ -1,12 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System.Media;
+using System.Security.Cryptography;
 using UnityEngine;
 
 public class Meteoritos : MonoBehaviour
 {
     public float speed = 5f;
     public float damageAmount = 10f;
+
+    public GameObject particlePrefab;
+
+    public AudioClip explosionMeteoritosAudioClip;
 
     private Rigidbody2D rb;
 
@@ -18,9 +22,24 @@ public class Meteoritos : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Player player = collision.gameObject.GetComponent<Player>();
-        player.Damage(damageAmount);
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            Player player = collision.gameObject.GetComponent<Player>();
 
+            if (player != null)
+            {
+                player.Damage(damageAmount);
+                DestroyMeteoritos();
+            }
+        }
+    }
+
+    public void DestroyMeteoritos()
+    {
+        AudioSource.PlayClipAtPoint(explosionMeteoritosAudioClip, transform.position, 1f);
+
+        GameObject particles = Instantiate(particlePrefab, transform.position, transform.rotation);
+        Destroy(particles, 1f);
         Destroy(this.gameObject);
     }
 }

@@ -1,5 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.Threading;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -11,9 +13,29 @@ public class PlayerMovement : MonoBehaviour
     float x;
     float y;
 
+    float bottomLimit;
+    float leftLimit;
+    float topLimit;
+    float rightLimit;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        //SpriteRenderer renderer = GetComponent<SpriteRenderer>();
+
+        Vector3 bottomLeft = Camera.main.ViewportToWorldPoint(Vector3.zero);
+        bottomLimit = bottomLeft.y;
+        leftLimit = bottomLeft.x;
+
+        Vector3 topRight = Camera.main.ViewportToWorldPoint(Vector3.one);
+        topLimit = topRight.y;
+        rightLimit = topRight.x;
+
+        bottomLimit += GetComponent<Renderer>().bounds.extents.y;
+        topLimit -= GetComponent<Renderer>().bounds.extents.y;
+        leftLimit += GetComponent<Renderer>().bounds.extents.x;
+        rightLimit -= GetComponent<Renderer>().bounds.extents.x;
+
     }
     private void Update()
     {
@@ -27,6 +49,17 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        rb.MovePosition(transform.position + new Vector3(x, y, 0f) * speed * Time.fixedDeltaTime);
+        Vector3 desiredPosition = transform.position + new Vector3(x, y, 0f) * speed * Time.fixedDeltaTime;
+
+        desiredPosition.x = Mathf.Clamp(desiredPosition.x, leftLimit, rightLimit);
+
+        desiredPosition.y = Mathf.Clamp(desiredPosition.y, bottomLimit, topLimit);
+
+        rb.MovePosition(desiredPosition);
+
+        //rb.MovePosition(transform.position + new Vector3(x, y, 0f) * speed * Time.fixedDeltaTime);
+
+
     }
+
 }
